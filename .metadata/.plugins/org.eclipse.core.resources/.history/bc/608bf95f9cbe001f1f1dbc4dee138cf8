@@ -1,0 +1,18 @@
+package com.spring.product.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+ @Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProductModel 
+{
+	private String Name;
+	private String Brand;
+	private String MadeIN;
+	private double Price;
+	private int Discountrate;
+	private int Quantity;
+}

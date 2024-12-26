@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Detail</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Form</h1>
+    <form th:action="@{/submit}" th:object="${ProductModel}" method="post">
+        <!-- Product Name -->
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your Name" th:value="*{name}" required>
+        <p class="error" th:if="${#fields.hasErrors('name')}" th:text="${#fields.errors('name')}"></p>
+        <br><br>
+
+        <!-- Product Brand -->
+        <label for="brand">Product Brand:</label>
+        <input type="text" id="brand" name="brand" placeholder="Enter your Brand" th:value="*{brand}" required>
+        <p class="error" th:if="${#fields.hasErrors('brand')}" th:text="${#fields.errors('brand')}"></p>
+        <br><br>
+
+        <!-- Product Price -->
+        <label for="price">Product Price:</label>
+        <input type="number" id="price" name="price" th:value="*{price}" min="0" step="0.01" required>
+        <p class="error" th:if="${#fields.hasErrors('price')}" th:text="${#fields.errors('price')}"></p>
+        <br><br>
+
+        <!-- Made In -->
+        <label for="madein">Made in:</label>
+        <input type="text" id="madein" name="madein" th:value="*{madein}" required>
+        <p class="error" th:if="${#fields.hasErrors('madein')}" th:text="${#fields.errors('madein')}"></p>
+        <br><br>
+
+        <!-- Quantity -->
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" th:value="*{quantity}" min="1" required>
+        <p class="error" th:if="${#fields.hasErrors('quantity')}" th:text="${#fields.errors('quantity')}"></p>
+        <br><br>
+
+        <!-- Discount Rate -->
+        <label for="discountrate">Discount Rate:</label>
+        <input type="number" id="discountrate" name="discountrate" th:value="*{discountrate}" min="0" max="100" step="0.01">
+        <p class="error" th:if="${#fields.hasErrors('discountrate')}" th:text="${#fields.errors('discountrate')}"></p>
+        <br><br>
+
+        <!-- Buttons -->
+        <button type="submit">Save Product</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+</html>

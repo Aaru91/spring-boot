@@ -1,0 +1,44 @@
+package com.spring.employeeservice;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.employee.employeemodel.EmployeeModel;
+import com.spring.employee.entity.EmployeeEntity;
+
+@Service
+public class EmployeeService 
+{
+   @Autowired
+   EmployeeRepository employeeRepository;
+   
+   public void saveEmployeeData(EmployeeModel employeemodel)
+   {
+   
+   double da;
+   da = 0.2 * employeemodel.getSalary();
+   
+   double hra;
+   hra = 0.3 * employeemodel.getSalary();
+   
+   double totalsalary;
+   totalsalary = da + hra + employeemodel.getSalary();
+   
+   
+   EmployeeEntity employeeEntity = new EmployeeEntity();
+   
+   employeeEntity.setId(employeemodel.getid());
+   EmployeeEntity.setName(employeemodel.getName());
+   EmployeeEntity.setPhoneno(employeemodel.getPhoneno());
+   EmployeeEntity.setGender(employeemodel.getGender());
+   EmployeeEntity.setDoj(employeeModel.getDoj());
+   EmployeeEntity.setdepton(employeeModel.getDeptno());
+   EmployeeEntity.setSalary(employeeModel.getSalary());
+   EmployeeEntity.setDa(da);
+   EmployeeEntity.setHra(hra);
+   EmployeeEntity.setTotalSalary(totalsalary);
+   
+   EmployeeRepository.save(employeeEntity);
+   
+  }
+}

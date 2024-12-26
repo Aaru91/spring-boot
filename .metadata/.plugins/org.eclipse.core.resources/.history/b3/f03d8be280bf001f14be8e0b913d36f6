@@ -1,0 +1,81 @@
+package com.spring.product.service;
+
+import java.util.List;
+import java.util.Optional;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.spring.product.Repository.Repository;
+import com.spring.product.entity.ProductEntity;
+import com.spring.product.model.ProductModel;
+
+
+
+@org.springframework.stereotype.Service
+public class Service {
+      @Autowired
+      Repository repository;
+      
+     
+      public void saveproductdetails(ProductModel productmodel)
+      {
+      	double stockValue;
+      	stockValue=productmodel.getPrice()*productmodel.getQuantity();
+      	
+      	double discountPrice;
+      	discountPrice=productmodel.getPrice()*productmodel.getDiscountrate()/100;
+      	
+      	double offerPrice;
+      	offerPrice=productmodel.getPrice()-discountPrice;
+      	
+      	double taxRate=30;
+      	
+      	double finalPrice = offerPrice+ ((taxRate/100) * offerPrice);
+      	
+      	ProductEntity productentity = new ProductEntity();
+      	
+      	productentity.setName(productmodel.getName());
+      	productentity.setBrand(productmodel.getBrand());
+      	productentity.setMadein(productmodel.getMadein());
+      	productentity.setPrice(productmodel.getPrice());
+      	productentity.setQuantity(productmodel.getQuantity());
+      	productentity.setDiscountrate(productmodel.getDiscountrate());
+      	
+      	
+      	productentity.setOfferprice(offerPrice);
+      	productentity.setStockvalue(stockValue);
+      	productentity.setTaxprice(taxRate);
+      	productentity.setFinalprice(finalPrice);
+      	
+      	repository.save(productentity);
+      }
+      
+      
+      public List <ProductEntity> getallproducts()
+      {
+    	  List <ProductEntity> product = repository.findAll();
+    	  return product;
+      }
+
+
+	public ProductEntity searchbyid(long id) {
+		
+		  Optional<ProductEntity> optionaldata =repository.findById(id);
+		  
+		  if(optionaldata.isPresent())
+		  {
+			  ProductEntity product = optionaldata.get();
+			  return product;
+		  }
+		  else
+		  {
+		    return null;
+		  }
+	}
+	
+	public void deletebyid (long id)
+	{
+		repository.deleteById(id);
+	}
+}

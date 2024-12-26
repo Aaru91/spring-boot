@@ -1,0 +1,10 @@
+package com.spring.employeerepository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.spring.employee.entity.EmployeeEntity;
+
+public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Integer>
+{
+
+}

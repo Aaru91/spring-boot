@@ -1,0 +1,48 @@
+package com.spring.product.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.spring.product.Repository.Repository;
+import com.spring.product.entity.ProductEntity;
+import com.spring.product.model.ProductModel;
+
+
+
+@org.springframework.stereotype.Service
+public class Service {
+      @Autowired
+      Repository repository;
+      
+     
+      public void saveproductdetails(ProductModel productmodel)
+      {
+      	double stockValue;
+      	stockValue=productmodel.getPrice()*productmodel.getQuantity();
+      	
+      	double discountPrice;
+      	discountPrice=productmodel.getPrice()*productmodel.getDiscountrate()/100;
+      	
+      	double offerPrice;
+      	offerPrice=productmodel.getPrice()-discountPrice;
+      	
+      	double taxRate=30;
+      	
+      	double finalPrice = offerPrice+ ((taxRate/100) * offerPrice);
+      	
+      	ProductEntity productentity = new ProductEntity();
+      	
+      	productentity.setName(productmodel.getName());
+      	productentity.setBrand(productmodel.getBrand());
+      	productentity.setMadeIN(productmodel.getMadeIN());
+      	productentity.setPrice(productmodel.getPrice());
+      	productentity.setQuantity(productmodel.getQuantity());
+      	productentity.setDiscountrate(productmodel.getDiscountrate());
+      	productentity.setOfferprice(offerPrice);
+      	productentity.setStockvalue(stockValue);
+      	productentity.setTaxprice(taxRate);
+      	productentity.setFinalprice(finalPrice);
+      	
+      	repository.save(productentity);
+      
+      }
+}

@@ -1,0 +1,31 @@
+package com.spring.product.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PagedModel;
+
+import com.spring.product.Repository.Repository;
+import com.spring.product.model.ProductModel;
+
+
+@org.springframework.stereotype.Service
+public class Service {
+      @Autowired
+      Repository repository;
+      
+     public void SaveProductDetails()
+     {
+    	 double stockvalue;
+		stockvalue = ProductModel.getPrice() * ProductModel.getQuantity();
+    	 
+    	 
+    	 double dicountprice;
+		dicountprice = ProductModel.getPrice() * ProductModel.getDiscountrate()/100;
+    	 
+    	 double offerprice;
+    	 offerprice = ProductModel.getPrice()-dicountprice;
+    	 
+    	 double taxrate=30;
+    	 
+    	 double finalprice = offerprice + ((taxrate/100)* offerprice);
+    }
+}
